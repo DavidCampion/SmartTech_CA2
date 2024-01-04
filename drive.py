@@ -9,11 +9,12 @@ from io import BytesIO
 from PIL import Image
 import numpy as np
 import cv2
-from matplotlib import image as mpimg
+# from matplotlib import image as mpimg
 
 sio = socketio.Server()
+print(sio)
 app = Flask(__name__)
-speed_limit = 20
+speed_limit = 10
 
 
 def preprocess(img):
@@ -51,6 +52,6 @@ def connect(sid, environ):
 
 
 if __name__ == '__main__':
-    model = load_model('alpha_model.h5')
+    model = load_model('model.h5')
     app = socketio.Middleware(sio, app)
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)

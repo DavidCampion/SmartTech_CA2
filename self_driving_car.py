@@ -21,16 +21,20 @@ def path_leaf(path):
     return tail
 
 def load_img_steering(datadir, df):
-    image_path = []
-    steering = []
-    for i in range(len(data)):
-        indexed_data = data.iloc[i]
-        center, left, right = indexed_data[0], indexed_data[1], indexed_data[2]
-        image_path.append(os.path.join(datadir, center.strip()))
-        steering.append(float(indexed_data[3]))
-    image_paths = np.asarray(image_path)
-    steerings = np.asarray(steering)
-    return image_paths, steerings
+  image_path = []
+  steering = []
+  for i in range(len(data)):
+    indexed_data = data.iloc[i]
+    centre,left,right = indexed_data[0], indexed_data[1],indexed_data[2]
+    image_path.append(os.path.join(datadir,centre.strip()))
+    steering.append(float(indexed_data[3]))
+    image_path.append(os.path.join(datadir, left.strip()))
+    steering.append(float(indexed_data[3]) + 0.15)
+    image_path.append(os.path.join(datadir, right.strip()))
+    steering.append(float(indexed_data[3]) - 0.15)
+  image_paths = np.asarray(image_path)
+  steerings = np.asarray(steering)
+  return image_paths, steerings
 
 def img_preprocess(img):
     img = mpimg.imread(img)
