@@ -63,14 +63,10 @@ def nvidia_model():
               strides=(2, 2), activation='elu'))
     model.add(Convolution2D(64, kernel_size=(3, 3), activation='elu'))
     model.add(Convolution2D(64, kernel_size=(3, 3), activation='elu'))
-    model.add(Dropout(0.5))
     model.add(Flatten())
     model.add(Dense(100, activation='elu'))
-    model.add(Dropout(0.5))
     model.add(Dense(50, activation='elu'))
-    model.add(Dropout(0.5))
     model.add(Dense(10, activation='elu'))
-    model.add(Dropout(0.5))
     model.add(Dense(1))
     optimizer = Adam(learning_rate=0.001)
     model.compile(loss='mse', optimizer=optimizer)
@@ -132,9 +128,6 @@ columns = ['center', 'left', 'right', 'steering', 'throttle', 'reverse', 'speed'
 data = pd.read_csv(os.path.join(datadir, 'driving_log.csv'), names=columns)
 pd.set_option('display.max_colwidth', 7)
 
-data['center'] = data['center'].apply(path_leaf)
-data['left'] = data['left'].apply(path_leaf)
-data['right'] = data['right'].apply(path_leaf)
 
 num_bins = 25
 samples_per_bin = 400
