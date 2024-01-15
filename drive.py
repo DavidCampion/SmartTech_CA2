@@ -16,6 +16,10 @@ print(sio)
 app = Flask(__name__)
 speed_limit = 30
 
+# Model v10 - Final Model
+# Track 1 - 01:27:00 - >30mph - Full Lap
+# Track 2 - 00:00:00 - ~20mph - Half Lap
+
 
 def preprocess(img):
     img = img[60:135, :, :]
