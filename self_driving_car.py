@@ -286,6 +286,7 @@ def nvidia_model():
     model.add(Convolution2D(48, kernel_size=(5, 5),
               strides=(2, 2), activation='elu'))
     model.add(Convolution2D(64, kernel_size=(3, 3), activation='elu'))
+    model.add(Convolution2D(64, kernel_size=(3, 3), activation='elu'))
 
 
     model.add(Flatten())
@@ -303,7 +304,7 @@ print(model.summary())
 
 early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
 
-history = model.fit(batch_generator(X_train, y_train, 100, 1), steps_per_epoch=300, epochs=10, validation_data=batch_generator(X_valid, y_valid, 1, 0), validation_steps=200, verbose=1, shuffle=1)
+history = model.fit(batch_generator(X_train, y_train, 250, 1), steps_per_epoch=300, epochs=15, validation_data=batch_generator(X_valid, y_valid, 250, 0), validation_steps=200, verbose=1, shuffle=1)
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
